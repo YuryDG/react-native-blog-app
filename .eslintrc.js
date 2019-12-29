@@ -21,11 +21,12 @@ module.exports = {
     ],
     settings: {
         react: {
-          "version": "detect",
+          version: "detect",
         }
     },
     rules: {
         'eqeqeq': ["error", "always"],
+        'eol-last': ["error", "always"],
         'react-hooks/rules-of-hooks': "error",
         'react-hooks/exhaustive-deps': "warn"
     }
