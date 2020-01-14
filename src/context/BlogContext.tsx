@@ -1,28 +1,28 @@
 import React, { useState } from 'react';
-import { BlogPost } from '../interfaces/interfaces'
+import { BlogPost } from '../interfaces/interfaces';
 
 type ContextType = {
   data: BlogPost[],
-  addBlogPost?: Function
+  addBlogPost?: () => void
 }
 
-const generateId = () => Math.floor(Math.random() * 9999)
+const generateId = () => Math.floor(Math.random() * 9999);
 
 const generateBlogPosts = (): BlogPost[] => {
-  return Array.from({ length: 15 }, (v, k) => {
+  return Array.from({ length: 3 }, (v, k) => {
     return {
       id: generateId(),
       title: `Blog #${k + 1}`,
-      content: `Content for Blog#${k + 1}`
-    }
-  })
-}
+      content: `Content for Blog#${k + 1}`,
+    };
+  });
+};
 
 const BlogContext = React.createContext<ContextType>({ data: [] });
 
 export const BlogProvider: React.FC<{}> = ({ children }) => {
 
-  const [blogPosts, setBlogPosts] = useState(generateBlogPosts())
+  const [blogPosts, setBlogPosts] = useState(generateBlogPosts());
 
   const addBlogPost = () => {
     const newBlogPost = {
@@ -31,12 +31,12 @@ export const BlogProvider: React.FC<{}> = ({ children }) => {
       content: `Content ${blogPosts.length + 1}`,
     };
 
-    setBlogPosts([...blogPosts, newBlogPost])
-  }
+    setBlogPosts([...blogPosts, newBlogPost]);
+  };
 
-  return <BlogContext.Provider value={{ data: blogPosts, addBlogPost }} >
+  return <BlogContext.Provider value={{ data: blogPosts, addBlogPost }}>
     {children}
-  </BlogContext.Provider >
-}
+  </BlogContext.Provider>;
+};
 
 export default BlogContext;

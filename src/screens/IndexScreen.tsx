@@ -1,23 +1,17 @@
 import React, { useContext } from 'react';
-import { View, StyleSheet, FlatList } from 'react-native';
+import { View, StyleSheet, FlatList, Button } from 'react-native';
 import BlogContext from '../context/BlogContext';
 import BlogItem from '../components/BlogItem';
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingHorizontal: 10
-  },
-});
 
 type IndexScreenProps = {
 }
 
 const IndexScreen: React.FC<IndexScreenProps> = () => {
-  const { data: blogPosts } = useContext(BlogContext);
+  const { data: blogPosts, addBlogPost } = useContext(BlogContext);
 
   return (
     <View style={styles.container}>
+      <Button title="Add" onPress={addBlogPost} />
       <FlatList
         data={blogPosts}
         keyExtractor={(blog) => String(blog.id)}
@@ -26,5 +20,12 @@ const IndexScreen: React.FC<IndexScreenProps> = () => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    paddingHorizontal: 10,
+  },
+});
 
 export default IndexScreen;
